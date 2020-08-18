@@ -44,7 +44,8 @@ type MmapIo = {
         flags: MapFlags,
         fd: FileDescriptor,
         offset?: number,
-        advise?: MapAdvise
+        advise?: MapAdvise,
+        name?: string
     ): Buffer
 
     advise(

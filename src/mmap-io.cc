@@ -103,9 +103,9 @@ inline auto get_obj(VT v8_obj) -> Local<Object> {
 JS_FN(mmap_map) {
     Nan::HandleScope();
 
-    if (info.Length() < 4 && info.Length() > 6) {
+    if (info.Length() < 4 && info.Length() > 7) {
         return Nan::ThrowError(
-            "map() takes 4, 5 or 6 arguments: (size :int, protection :int, flags :int, fd :int [, offset :int [, advise :int]])."
+            "map() takes 4, 5, 6 or 7 arguments: (size :int, protection :int, flags :int, fd :int [, offset :int [, advise :int [, name :string ]])."
         );
     }
 
@@ -124,7 +124,13 @@ JS_FN(mmap_map) {
     const size_t    offset          = static_cast<size_t>(get_v<int>(info[4], 0));
     const int       advise          = get_v<int>(info[5], 0);
 
+#ifdef _WIN32
+    const std::string name          = get_v<std::string>(info[6], 0);
+
+    char* data = static_cast<char*>( mmap( hinted_address, size, protection, flags, fd, offset, name.c_str()) );
+#else
     char* data = static_cast<char*>( mmap( hinted_address, size, protection, flags, fd, offset) );
+#endif
 
     if (data == MAP_FAILED) {
         return Nan::ThrowError((std::string("mmap failed, ") + std::to_string(errno)).c_str());

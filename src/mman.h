@@ -25,7 +25,7 @@
 #define MADV_WILLNEED   0x03
 #define MADV_DONTNEED   0x04
 
-inline void* mmap(void* addr, size_t length, int prot, int flags, int fd, size_t offset) {
+inline void* mmap(void* addr, size_t length, int prot, int flags, int fd, size_t offset, LPCSTR name) {
     if (prot & ~(PROT_READ | PROT_WRITE | PROT_EXEC))
         return MAP_FAILED;
     if (fd == -1) {
