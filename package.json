@@ -43,10 +43,10 @@
         "clean": "rm -rf build dist",
         "build": "npm run build-addon && npm run build-es && npm run test",
         "build-addon": "node-gyp configure && node-gyp rebuild",
-        "build-es": "./node_modules/typescript/bin/tsc && cp ./dist/mmap-io.d.ts ./",
+        "build-es": "tsc && cp ./dist/mmap-io.d.ts ./",
         "prepare": "npm run build",
         "install": "npm run build-addon",
-        "test": "./node_modules/livescript/bin/lsc -o ./dist/ -b -c ./src/test.ls && ((which nodejs && nodejs ./dist/test.js) || node ./dist/test.js)",
+        "test": "lsc -o ./dist/ -b -c ./src/test.ls && ((which nodejs && nodejs ./dist/test.js) || node ./dist/test.js)",
         "watch": "while true; do (npm run build; inotifywait -qre close_write,moved_to --exclude '\\.git' ./src/; ) done;"
     },
     "devDependencies": {
