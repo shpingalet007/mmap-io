@@ -41,7 +41,7 @@
     ],
     "scripts": {
         "clean": "rm -rf build dist",
-        "build": "npm run build-addon && npm run build-es && npm run test",
+        "build": "npm run build-addon && npm run build-es",
         "build-addon": "node-gyp configure && node-gyp rebuild",
         "build-es": "run-script-os",
         "build-es:win32": "tsc && copy .\\dist\\mmap-io.d.ts .\\",
