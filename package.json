@@ -43,7 +43,9 @@
         "clean": "rm -rf build dist",
         "build": "npm run build-addon && npm run build-es && npm run test",
         "build-addon": "node-gyp configure && node-gyp rebuild",
-        "build-es": "tsc && cp ./dist/mmap-io.d.ts ./",
+        "build-es": "run-script-os",
+        "build-es:win32": "tsc && copy .\\dist\\mmap-io.d.ts .\\",
+        "build-es:default": "tsc && cp ./dist/mmap-io.d.ts ./",
         "prepare": "npm run build",
         "install": "npm run build-addon",
         "test": "lsc -o ./dist/ -b -c ./src/test.ls && ((which nodejs && nodejs ./dist/test.js) || node ./dist/test.js)",
@@ -55,8 +57,9 @@
         "livescript": "^1.6.0"
     },
     "dependencies": {
-        "errno": "*",
         "bindings": "^1.5.0",
-        "nan": "^2.14.0"
+        "errno": "*",
+        "nan": "^2.14.0",
+        "run-script-os": "^1.1.1"
     }
 }
