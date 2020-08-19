@@ -45,7 +45,7 @@ type MmapIo = {
         fd: FileDescriptor,
         offset?: number,
         advise?: MapAdvise,
-        name?: string
+        name?: Buffer
     ): Buffer
 
     advise(
