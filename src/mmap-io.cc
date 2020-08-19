@@ -125,9 +125,10 @@ JS_FN(mmap_map) {
     const int       advise          = get_v<int>(info[5], 0);
 
 #ifdef _WIN32
-    const std::string name          = get_v<std::string>(info[6], 0);
+    Local<Object>   nameBuf     = get_obj(info[6]);
+    char*           nameData    = node::Buffer::Data(nameBuf);
 
-    char* data = static_cast<char*>( mmap( hinted_address, size, protection, flags, fd, offset, name.c_str()) );
+    char* data = static_cast<char*>( mmap( hinted_address, size, protection, flags, fd, offset, nameData) );
 #else
     char* data = static_cast<char*>( mmap( hinted_address, size, protection, flags, fd, offset) );
 #endif
