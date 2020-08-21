@@ -7,6 +7,13 @@
         "email": "oscar@campbell.nu",
         "url": "https://github.com/ozra"
     },
+    "binary": {
+        "module_name": "mmap_io",
+        "module_path": "./build/binding/{configuration}/{node_abi}-{platform}-{arch}/",
+        "remote_path": "./v{version}/",
+        "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz",
+        "host": "https://github.com/Widdershin/mmap-io/releases/download"
+    },
     "description": "io.js/node.js mmap bindings revisited.",
     "homepage": "https://github.com/ozra/mmap-io",
     "keywords": [
@@ -42,7 +49,7 @@
     "scripts": {
         "clean": "rm -rf build dist",
         "build": "npm run build-addon && npm run build-es",
-        "build-addon": "node-gyp configure && node-gyp rebuild",
+        "build-addon": "node-pre-gyp install --fallback-to-build",
         "build-es": "run-script-os",
         "build-es:win32": "tsc && copy .\\dist\\mmap-io.d.ts .\\",
         "build-es:default": "tsc && cp ./dist/mmap-io.d.ts ./",
@@ -57,9 +64,10 @@
         "livescript": "^1.6.0"
     },
     "dependencies": {
-        "bindings": "^1.5.0",
         "errno": "*",
         "nan": "^2.14.0",
+        "node-gyp": "^7.1.0",
+        "node-pre-gyp": "^0.15.0",
         "run-script-os": "^1.1.1"
     }
 }

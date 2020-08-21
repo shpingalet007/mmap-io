@@ -1,4 +1,7 @@
-const mmap_lib_raw_ = require("../build/Release/mmap-io")
+const binary = require('node-pre-gyp');
+const path = require('path');
+const binding_path = binary.find(path.resolve(path.join(__dirname,'./package.json')));
+const mmap_lib_raw_ = require(binding_path);
 
 type FileDescriptor = number
 
