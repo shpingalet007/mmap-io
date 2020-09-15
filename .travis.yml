@@ -13,14 +13,15 @@ env:
     - NODE_VERSION="12"
     - NODE_VERSION="13"
     - NODE_VERSION="14"
+  global:
+    secure: Gkc426FAczSxSMSzQ5tq8p+eC8UV2LQ9U1Lb1X8oq2NG9wlTGiwyT9P70HqZtmpDDQ5zy+xF0G73Zt1mge41/weWKz7NV/1MJ2M60NQT9saG/FWKoe2uxDQWfvNnWW62tiXV7VGNIVC6wstsPOXS8PoohvBZjo282XjefmW2fBFwA6cN48UoN7g/1pbm5o2diTFBwPBzqnNdKCleeb4T0W/LHJpmXUm0siRsD5L01YGiPtgVXhD3jdRgompJq2llCBc65zY5u8gBXOQeG/rOdxTu3aw634sbVRa2byAdVmRf+eFHWmRq5+SrsG5rTO7LZoFtBMqEUjfGbCHfuLdW9YfbV/kHP1aaO6K3XetFitQ6BZd5YeBt0yk872IfninRWkWYAfjUFuXcidOqgjIxckLUrO3jEyJZc0r0DYJka2IoAv18WrXby+TOM2MbDa3uPesANs+hro4E9BhFjVRDu9MxDfU1bTLFOT3LryzPjmhIdBiFfrdHwSgHUQJFXAQHq2V/20ZMFo61pxSiS4DHsQKrxLfSSgiTqecUcZv4YSUl2f0P2mVQWG/an57sGmsqD2TgTrPdwkKX8mazdZo4uOEg9tMTp1wvn3zRl+RqRFkX676T1F4I8dB08AXUOPpFY7INV9BLxJDPvLJo68BcoT7n22RvRW/8H5EolqpQokw=
 
 before_install:
 - rm -rf ~/.nvm/ && git clone --depth 1 https://github.com/creationix/nvm.git ~/.nvm
 - source ~/.nvm/nvm.sh
 - nvm install $NODE_VERSION
 - nvm use $NODE_VERSION
-- PUBLISH_BINARY=false
-- if [[ $TRAVIS_BRANCH == `git describe --tags --always HEAD` ]]; then PUBLISH_BINARY=true; fi;
+- PUBLISH_BINARY=true
 
 install:
 - npm install
