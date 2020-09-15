@@ -20,6 +20,8 @@ install:
   - ps: Install-Product node $env:nodejs_version x64
   # install modules
   - npm install
+  - npm run build-binary
+  - npm run push-binary
 
 # Post-install test scripts.
 test_script:
