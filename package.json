@@ -53,6 +53,7 @@
         "build-es": "run-script-os",
         "build-es:win32": "tsc && copy .\\dist\\mmap-io.d.ts .\\",
         "build-es:default": "tsc && cp ./dist/mmap-io.d.ts ./",
+        "rebuild": "node-pre-gyp reinstall --build-from-source",
         "prepare": "npm run build",
         "install": "npm run build-addon",
         "build-binary": "node-pre-gyp rebuild && node-pre-gyp package",

@@ -20,8 +20,6 @@ install:
   - ps: Install-Product node $env:nodejs_version x64
   # install modules
   - npm install
-  - npm run build-binary
-  - npm run push-binary
 
 # Post-install test scripts.
 test_script:
@@ -33,3 +31,18 @@ test_script:
 
 # Don't actually build.
 build: off
+
+for:
+  -
+    branches:
+      only:
+        - /v\d*\.\d*\.\d*/
+
+    install:
+      # Get the latest stable version of Node.js or io.js
+      - ps: Install-Product node $env:nodejs_version x64
+      # install modules
+      - npm install
+      - npm run build-binary
+      - npm run push-binary
+
