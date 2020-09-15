@@ -100,11 +100,6 @@ inline auto get_obj(VT v8_obj) -> Local<Object> {
     return Nan::To<Object>(v8_obj).ToLocalChecked();
 }
 
-template <typename VT>
-inline auto get_obj_maybe(VT v8_obj, VT default_value) -> Local<Object> {
-    return Nan::To<Object>(v8_obj).FromMaybe(default_value);
-}
-
 JS_FN(mmap_map) {
     Nan::HandleScope();
 
@@ -130,8 +125,12 @@ JS_FN(mmap_map) {
     const int       advise          = get_v<int>(info[5], 0);
 
 #ifdef _WIN32
-    Local<Object>   nameBuf     = get_obj_maybe(info[6], node::Buffer::New(0));
-    char*           nameData    = node::Buffer::Data(nameBuf);
+    char* nameData = nullptr;
+
+    if (info.Length() > 6) {
+      Local<Object> nameBuf = get_obj(info[6]);
+      nameData = node::Buffer::Data(nameBuf);
+    }
 
     char* data = static_cast<char*>( mmap( hinted_address, size, protection, flags, fd, offset, nameData) );
 #else
