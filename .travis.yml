@@ -1,24 +1,31 @@
-language: node_js
-
-node_js:
-  - "node"
-  - "lts/*"
+language: cpp
 
 os:
-  - linux
-  - osx
+- linux
+- osx
 
-compiler:
-  - gcc
-  - clang
+env:
+  matrix:
+    - NODE_VERSION="8"
+    - NODE_VERSION="9"
+    - NODE_VERSION="10"
+    - NODE_VERSION="11"
+    - NODE_VERSION="12"
+    - NODE_VERSION="13"
+    - NODE_VERSION="14"
 
-# env:
-#   - CXX=g++-7
+before_install:
+- rm -rf ~/.nvm/ && git clone --depth 1 https://github.com/creationix/nvm.git ~/.nvm
+- source ~/.nvm/nvm.sh
+- nvm install $NODE_VERSION
+- nvm use $NODE_VERSION
+- PUBLISH_BINARY=false
+- if [[ $TRAVIS_BRANCH == `git describe --tags --always HEAD` ]]; then PUBLISH_BINARY=true; fi;
 
-# addons:
-#   apt:
-#     sources:
-#       - ubuntu-toolchain-r-test
-#     packages:
-#       - g++-7
+install:
+- npm install
 
+script:
+- if [[ $PUBLISH_BINARY == true ]]; then npm run build-binary && npm run push-binary; fi;
+- ./node_modules/.bin/node-pre-gyp clean
+- ./node_modules/.bin/node-gyp clean
