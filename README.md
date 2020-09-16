@@ -24,7 +24,10 @@ It should be noted that mem-mapping is by nature potentially blocking, and _shou
 
 # News and Updates
 
-### 2020-04-16: version 1.2.1
+### 2020-09-16: version 1.2.2
+- Fix name buffer not being passed to CreateFileMapping. Fork release on npm.
+
+### 2020-09-15: version 1.2.1
 - Forked as mmap-io is no longer maintained, added optional name buffer argument for mmap that is passed to CreateFileMapping on Windows.
 
 ### 2019-07-09/B: version 1.1.3, ..., 1.1.6
@@ -95,12 +98,13 @@ It should be noted that mem-mapping is by nature potentially blocking, and _shou
 Use npm or git.
 
 ```
-npm install mmap-io
+npm install @widdershin/mmap-io
 ```
 
 ```
-git clone https://github.com/ozra/mmap-io.git
+git clone https://github.com/Widdershin/mmap-io.git
 cd mmap-io
+npm install
 npm build
 ```
 
