@@ -1,5 +1,11 @@
 [![Build Status](https://travis-ci.org/ozra/mmap-io.svg?branch=master)](https://travis-ci.org/ozra/mmap-io)
 
+# Fork Notice
+
+This is a fork of mmap-io, as the upstream repo is no longer maintained.
+
+This version of mmap-io builds on Node v8-14, and provides binaries for Windows, macOS and Linux via node-pre-gyp.
+
 # Mmap for Node.js
 mmap(2) / madvise(2) / msync(2) / mincore(2) for node.js revisited.
 
