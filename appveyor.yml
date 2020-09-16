@@ -33,5 +33,5 @@ test_script:
 build: off
 
 deploy_script:
-  - IF DEFINED APPVEYOR_REPO_TAG npm run build-binary
-  - IF DEFINED APPVEYOR_REPO_TAG npm run push-binary
+  - ps: if ($env:APPVEYOR_REPO_TAG -eq 'true') { npm run build-binary }
+  - ps: if ($env:APPVEYOR_REPO_TAG -eq 'true') { npm run push-binary  }
