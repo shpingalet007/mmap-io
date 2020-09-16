@@ -18,6 +18,9 @@ It should be noted that mem-mapping is by nature potentially blocking, and _shou
 
 # News and Updates
 
+### 2020-04-16: version 1.2.1
+- Forked as mmap-io is no longer maintained, added optional name buffer argument for mmap that is passed to CreateFileMapping on Windows.
+
 ### 2019-07-09/B: version 1.1.3, ..., 1.1.6
 - rewritten the C++-code to catch up with V8/Nan breaking changes for node.js 12.*, which also removes all warnings in earlier versions.
 - refactored in to wrapper functions for extracting values, so should new breaking changes come in later versions, it will be quicker to adjust.

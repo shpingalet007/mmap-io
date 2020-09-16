@@ -55,7 +55,7 @@ inline void* mmap(void* addr, size_t length, int prot, int flags, int fd, size_t
     const DWORD dwOffsetHigh = (sizeof(size_t) > sizeof(DWORD)) ? DWORD((offset >> 32) & 0xFFFFFFFFL) : DWORD(0);
 
     HANDLE h = (fd != -1) ? HANDLE(uv_get_osfhandle(fd)) : INVALID_HANDLE_VALUE;
-    HANDLE fm = CreateFileMapping(h, nullptr, protect, dwEndHigh, dwEndLow, nullptr);
+    HANDLE fm = CreateFileMapping(h, nullptr, protect, dwEndHigh, dwEndLow, name);
     if (fm == nullptr)
         return MAP_FAILED;
 
