@@ -49,10 +49,18 @@ inline void* mmap(void* addr, size_t length, int prot, int flags, int fd, size_t
         protect = PAGE_READONLY;
 
     size_t end = length + offset;
-    const DWORD dwEndLow = (sizeof(size_t) > sizeof(DWORD)) ? DWORD(end & 0xFFFFFFFFL) : DWORD(end);
-    const DWORD dwEndHigh = (sizeof(size_t) > sizeof(DWORD)) ? DWORD((end >> 32) & 0xFFFFFFFFL) : DWORD(0);
-    const DWORD dwOffsetLow = (sizeof(size_t) > sizeof(DWORD)) ? DWORD(offset & 0xFFFFFFFFL) : DWORD(offset);
-    const DWORD dwOffsetHigh = (sizeof(size_t) > sizeof(DWORD)) ? DWORD((offset >> 32) & 0xFFFFFFFFL) : DWORD(0);
+
+#if _WIN64
+    const DWORD dwEndLow = DWORD(end & 0xFFFFFFFFL);
+    const DWORD dwEndHigh = DWORD((end >> 32) & 0xFFFFFFFFL);
+    const DWORD dwOffsetLow = DWORD(offset & 0xFFFFFFFFL);
+    const DWORD dwOffsetHigh = DWORD((offset >> 32) & 0xFFFFFFFFL);
+#else
+    const DWORD dwEndLow = DWORD(end);
+    const DWORD dwEndHigh = DWORD(0);
+    const DWORD dwOffsetLow = DWORD(offset);
+    const DWORD dwOffsetHigh = DWORD(0);
+#endif
 
     HANDLE h = (fd != -1) ? HANDLE(uv_get_osfhandle(fd)) : INVALID_HANDLE_VALUE;
     HANDLE fm = CreateFileMapping(h, nullptr, protect, dwEndHigh, dwEndLow, name);
