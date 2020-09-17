@@ -57,6 +57,7 @@
         "prepare": "npm run build",
         "install": "npm run build-addon",
         "build-binary": "node-pre-gyp rebuild && node-pre-gyp package",
+        "build-binary-x86": "node-pre-gyp rebuild --target_arch=ia32 && node-pre-gyp package",
         "push-binary": "node-pre-gyp-github publish",
         "test": "lsc -o ./dist/ -b -c ./src/test.ls && ((which nodejs && nodejs ./dist/test.js) || node ./dist/test.js)",
         "watch": "while true; do (npm run build; inotifywait -qre close_write,moved_to --exclude '\\.git' ./src/; ) done;"
