@@ -30,6 +30,7 @@ install:
 - npm install
 
 script:
+- npm run rebuild
 - npm test
 - if [[ $PUBLISH_BINARY == true ]]; then npm run build-binary && npm run push-binary; fi;
 - ./node_modules/.bin/node-pre-gyp clean

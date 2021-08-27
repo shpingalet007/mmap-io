@@ -30,6 +30,7 @@ test_script:
   - node --version
   - npm --version
   # run ci
+  - npm run rebuild
   - npm run test
 
 # Don't actually build.
