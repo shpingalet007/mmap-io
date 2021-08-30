@@ -4,7 +4,7 @@
 
 This is a fork of mmap-io, as the upstream repo is no longer maintained.
 
-This version of mmap-io builds on Node v8-14, and provides binaries for Windows, macOS and Linux via node-pre-gyp.
+This version of mmap-io builds on Node v8-16, and provides binaries for Windows, macOS and Linux via @mapbox/node-pre-gyp.
 
 # Mmap for Node.js
 mmap(2) / madvise(2) / msync(2) / mincore(2) for node.js revisited.
@@ -23,6 +23,9 @@ It should be noted that mem-mapping is by nature potentially blocking, and _shou
 
 
 # News and Updates
+
+### 2021-08-27: version 1.3.0
+- Add support for Node 15 and 16
 
 ### 2020-09-16: version 1.2.2
 - Fix name buffer not being passed to CreateFileMapping. Fork release on npm.

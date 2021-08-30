@@ -1,17 +1,14 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Publish Binaries
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    tags: v*
 
 jobs:
   build:
-
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -30,11 +27,13 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Build C++ project
-      run: npm run rebuild
-
     - name: Build TypeScript project
       run: npm run build-es
 
-    - name: Run tests
-      run: npm test
+    - name: Build binary
+      run: npm run build-binary
+
+    - name: Push binaries
+      env:
+        NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.NODE_PRE_GYP_GITHUB_TOKEN }}
+      run: npm run push-binary
