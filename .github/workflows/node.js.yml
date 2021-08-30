@@ -16,9 +16,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
-        os: [ ubuntu-latest ]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [8.x, 9.x, 10.x, 11.x, 12.x, 13.x, 14.x, 15.x, 16.x]
+        os: [ ubuntu-latest, macos-latest ]
 
     steps:
     - uses: actions/checkout@v2
@@ -27,6 +26,24 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+
+    - name: Install dependencies
     - run: npm ci
-    - run: npm run rebuild && npm run build-es
+
+    - name: Build C++ project
+    - run: npm run rebuild
+
+    - name: Build TypeScript project
+    - run: npm run build-es
+
+    - name: Run tests
     - run: npm test
+
+    - name: Check if Git tag exists
+      run: echo "::set-env name=HEAD_TAG::$(git tag --points-at HEAD)"
+
+    - name: Push binaries if Git tag exists and on master branch
+      env:
+        NODE_PRE_GYP_GITHUB_TOKEN: ${{ NODE_PRE_GYP_GITHUB_TOKEN }}
+      run: npm run push-binary
+      if: env.HEAD_TAG != '' && github.ref == 'refs/heads/master'
