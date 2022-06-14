@@ -10,8 +10,9 @@ node_modules/
 
 # Project / IDE-files
 .vscode/
+.idea
+.history
 
 GPATH
 GRTAGS
 GTAGS
-

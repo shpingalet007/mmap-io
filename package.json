@@ -72,7 +72,7 @@
         "@mapbox/node-pre-gyp": "^1.0.5",
         "errno": "*",
         "nan": "^2.14.0",
-        "node-gyp": "^3.8.0",
+        "node-gyp": "^9.0.0",
         "run-script-os": "^1.1.1"
     }
 }
