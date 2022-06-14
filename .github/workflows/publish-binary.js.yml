@@ -12,6 +12,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
+      max-parallel: 2
       matrix:
         node-version: [12.x, 14.x, 16.x, 17.x, 18.x]
         os: [ ubuntu-latest, macos-latest ]
