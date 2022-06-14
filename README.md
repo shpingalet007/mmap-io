@@ -24,6 +24,10 @@ It should be noted that mem-mapping is by nature potentially blocking, and _shou
 
 # News and Updates
 
+### 2021-08-27: version 1.4.0
+- Add support for Node 17 and 18
+- Drop support for Node 8/9/10/11
+
 ### 2021-08-27: version 1.3.0
 - Add support for Node 15 and 16
 
