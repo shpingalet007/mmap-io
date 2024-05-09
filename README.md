@@ -4,7 +4,7 @@
 
 This is a fork of mmap-io, as the upstream repo is no longer maintained.
 
-This version of mmap-io builds on Node v8-16, and provides binaries for Windows, macOS and Linux via @mapbox/node-pre-gyp.
+This version of mmap-io builds on Node v8-22, and provides binaries for Windows, macOS and Linux via @mapbox/node-pre-gyp.
 
 # Mmap for Node.js
 mmap(2) / madvise(2) / msync(2) / mincore(2) for node.js revisited.
