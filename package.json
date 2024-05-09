@@ -1,5 +1,5 @@
 {
-    "name": "@raygun-nickj/mmap-io",
+    "name": "@riaskov/mmap-io",
     "version": "1.4.1",
     "license": "MIT",
     "author": {
@@ -7,15 +7,21 @@
         "email": "oscar@campbell.nu",
         "url": "https://github.com/ozra"
     },
+    "contributors": [
+        {
+          "name": "Andrei Riaskov",
+          "email": "code@riaskov.com"
+        }
+    ],
     "binary": {
         "module_name": "mmap_io",
         "module_path": "./build/binding/{configuration}/{node_abi}-{platform}-{arch}/",
         "remote_path": "./v{version}/",
         "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz",
-        "host": "https://github.com/Widdershin/mmap-io/releases/download/"
+        "host": "https://github.com/ARyaskov/mmap-io/releases/download/"
     },
     "description": "io.js/node.js mmap bindings revisited.",
-    "homepage": "https://github.com/Widdershin/mmap-io",
+    "homepage": "https://github.com/ARyaskov/mmap-io",
     "keywords": [
         "low level",
         "file",
@@ -29,10 +35,10 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/Widdershin/mmap-io.git"
+        "url": "https://github.com/ARyaskov/mmap-io.git"
     },
     "bugs": {
-        "url": "http://github.com/Widdershin/mmap-io/issues"
+        "url": "http://github.com/ARyaskov/mmap-io/issues"
     },
     "main": "mmap-io.js",
     "files": [

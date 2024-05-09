@@ -1,12 +1,11 @@
-[![Build Status](https://travis-ci.org/ozra/mmap-io.svg?branch=master)](https://travis-ci.org/ozra/mmap-io)
-
 # Fork Notice
 
-This is a fork of mmap-io, as the upstream repo is no longer maintained.
+This is a fork of mmap-io (https://github.com/Widdershin/mmap-io/), as the upstream repo is no longer maintained and it didn't compile well on my machine for newer Node.js.
 
-This version of mmap-io builds on Node v8-22, and provides binaries for Windows, macOS and Linux via @mapbox/node-pre-gyp.
+This version of mmap-io builds on Node up to 22, and provides binaries for Windows and macOS via @mapbox/node-pre-gyp.
 
-# Mmap for Node.js
+# Author's notice: 
+## Mmap for Node.js
 mmap(2) / madvise(2) / msync(2) / mincore(2) for node.js revisited.
 
 I needed shared memory mapping and came across @bnoordhuis module [node-mmap](https://github.com/bnoordhuis/node-mmap), only to find that it didn't work with later versions of io.js, node.js and compatibles. So out of need I threw this together along with the functionality I found was missing in the node-mmap: advice and sync.
@@ -23,6 +22,9 @@ It should be noted that mem-mapping is by nature potentially blocking, and _shou
 
 
 # News and Updates
+
+### 2024-05-09: version 1.4.1
+- Add support for Node 22
 
 ### 2021-08-27: version 1.4.0
 - Add support for Node 17 and 18
@@ -105,14 +107,13 @@ It should be noted that mem-mapping is by nature potentially blocking, and _shou
 Use npm or git.
 
 ```
-npm install @raygun-nickj/mmap-io
+npm install @riaskov/mmap-io
 ```
 
 ```
-git clone https://github.com/Widdershin/mmap-io.git
+git clone https://github.com/ARyaskov/mmap-io.git
 cd mmap-io
-npm install
-npm build
+yarn
 ```
 
 
@@ -175,17 +176,6 @@ core-stats = mmap.incore buffer
 - If you miss a feature - contribute! Or request it in an issue.
 - If documentation isn't clear, make an issue.
 
-
-# Contribution Guidelines
-- Please create a new branch like `fix-{ISSUE_NUMBER}-human-readable-descr-here` or `feature-this-and-that` for your work
-- PR using that branch
-- Have a look at surrounding code for style and follow that
-    - 4 spaces indent
-    - 12 spaces initial indent for function bodies in the C++ code
-        - Yeah it was a "feel it out" of the moment, I'll leave it there.
-- _Please_, when writing an issue or making a PR: tag my handle `@ozra`, so that
-  GitHub adds a notification to the _"participating" list_ (less risk I miss it)
-    `
 
 # Tests
 ```
