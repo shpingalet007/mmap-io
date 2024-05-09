@@ -20,7 +20,7 @@
         "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz",
         "host": "https://github.com/ARyaskov/mmap-io/releases/download/"
     },
-    "description": "io.js/node.js mmap bindings revisited.",
+    "description": "Node.js mmap bindings revisited.",
     "homepage": "https://github.com/ARyaskov/mmap-io",
     "keywords": [
         "low level",
@@ -70,7 +70,6 @@
     },
     "devDependencies": {
         "@types/node": "^11.10.5",
-        "livescript": "^1.6.0",
         "node-pre-gyp-github": "^1.4.4",
         "typescript": "^3.5.3"
     },
