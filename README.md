@@ -1,3 +1,21 @@
+
+# mmap-io - Node.js addon for memory mapping files and shared memory
+
+## Quick info
+
+- Long story short: with this addon you can increase performance of your file interactions by memory mapping files, 
+you are "project" some file to RAM and push data to RAM without any interactions with hdd/ssd subsystem -- this module will
+facilitate reliable syncing between RAM-file and disk-file.
+- It's a fork of mmap-io ([ozra/mmap-io](https://github.com/ozra/mmap-io) -> [Widdershin/mmap-io](https://github.com/Widdershin/mmap-io))
+- **mmap-io** is written in C++17 and TypeScript, when you're installing it in your project, you're automatically getting 
+a precompiled binary (.node-file) for your platform from Downloads section of this project. 
+Otherwise it requires a C++17 compiler and Python 3.12+ on your machine to build.
+- **mmap-io** is tested on Node.js 16, 18, 19, 20, 21, 22. Sorry, but there is no Node.js 17 because of some compilation stage issues.
+- **mmap-io** has built binaries for Windows x86_64, Linux x86_64, Mac x86_64, Mac ARM.
+- potential use cases: working with big files (like highly volatile game map files), pushing data to cache files, video/audio-processing, messaging mechanics for inter-process communication.
+
+
+
 # Fork Notice
 
 This is a fork of mmap-io (https://github.com/Widdershin/mmap-io/), as the upstream repo is no longer maintained and it didn't compile well on my machine for newer Node.js.

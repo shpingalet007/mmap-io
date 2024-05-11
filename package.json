@@ -9,6 +9,10 @@
     },
     "contributors": [
         {
+          "name": "Nick Johnstone",
+          "url": "https://github.com/Widdershin"
+        },
+        {
           "name": "Andrei Riaskov",
           "email": "code@riaskov.com"
         }
