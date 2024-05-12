@@ -1,6 +1,6 @@
 {
     "name": "@riaskov/mmap-io",
-    "version": "1.4.2",
+    "version": "1.4.3",
     "license": "MIT",
     "author": {
         "name": "Oscar Campbell",
@@ -20,7 +20,7 @@
     "binary": {
         "module_name": "mmap_io",
         "module_path": "./build/binding/{configuration}/{node_abi}-{platform}-{arch}/",
-        "remote_path": "./v{version}/",
+        "remote_path": "./{version}/",
         "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz",
         "host": "https://github.com/ARyaskov/mmap-io/releases/download/"
     },
