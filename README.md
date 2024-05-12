@@ -12,7 +12,7 @@ a precompiled binary (.node-file) for your platform from Downloads section of th
 Otherwise it requires a C++17 compiler and Python 3.12+ on your machine to build.
 - **mmap-io** is tested on Node.js 16 (16.14+), 18, 19, 20, 21, 22. Sorry, but there is no Node.js 17 because of some compilation stage issues.
 - **mmap-io** has built binaries for Windows x86_64, Linux x86_64, Mac x86_64, Mac ARM.
-- potential use cases: working with big files (like highly volatile game map files), pushing data to cache files, video/audio-processing, messaging mechanics for inter-process communication.
+- Potential use cases: working with big files (like highly volatile game map files), pushing data to cache files, video/audio-processing, messaging mechanics for inter-process communication.
 
 ## Quick TS example
 
