@@ -56,7 +56,7 @@ It should be noted that mem-mapping is by nature potentially blocking, and _shou
 
 # News and Updates
 
-### 2024-05-09: version 1.4.1
+### 2024-05-12: version 1.4.2
 - Add support for Node 22
 
 # Install
