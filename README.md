@@ -10,10 +10,25 @@ facilitate reliable syncing between RAM-file and disk-file.
 - **mmap-io** is written in C++17 and TypeScript, when you're installing it in your project, you're automatically getting 
 a precompiled binary (.node-file) for your platform from Downloads section of this project. 
 Otherwise it requires a C++17 compiler and Python 3.12+ on your machine to build.
-- **mmap-io** is tested on Node.js 16, 18, 19, 20, 21, 22. Sorry, but there is no Node.js 17 because of some compilation stage issues.
+- **mmap-io** is tested on Node.js 16 (16.14+), 18, 19, 20, 21, 22. Sorry, but there is no Node.js 17 because of some compilation stage issues.
 - **mmap-io** has built binaries for Windows x86_64, Linux x86_64, Mac x86_64, Mac ARM.
 - potential use cases: working with big files (like highly volatile game map files), pushing data to cache files, video/audio-processing, messaging mechanics for inter-process communication.
 
+## Quick TS example
+
+```typescript
+    import fs from "fs"
+    import mmap from "@riaskov/mmap-io"
+    
+    const file = fs.openSync("/home/ubuntu/some-file-here", "r+")
+    const buf = mmap.map(fs.fstatSync(file).size, mmap.PROT_WRITE, mmap.MAP_SHARED, file)
+    mmap.advise(buf, mmap.MADV_RANDOM)
+    // Now you can work with "buf" as with a regular Buffer object.
+    // All your changes will be synced with the file "some-file-here" on disk.
+    // For example, add number 1024 at 0 position of buffer:
+    // buf.writeUInt32LE(1024, 0)
+
+```
 
 
 # Fork Notice
@@ -43,83 +58,6 @@ It should be noted that mem-mapping is by nature potentially blocking, and _shou
 
 ### 2024-05-09: version 1.4.1
 - Add support for Node 22
-
-### 2021-08-27: version 1.4.0
-- Add support for Node 17 and 18
-- Drop support for Node 8/9/10/11
-
-### 2021-08-27: version 1.3.0
-- Add support for Node 15 and 16
-
-### 2020-09-16: version 1.2.2
-- Fix name buffer not being passed to CreateFileMapping. Fork release on npm.
-
-### 2020-09-15: version 1.2.1
-- Forked as mmap-io is no longer maintained, added optional name buffer argument for mmap that is passed to CreateFileMapping on Windows.
-
-### 2019-07-09/B: version 1.1.3, ..., 1.1.6
-- rewritten the C++-code to catch up with V8/Nan breaking changes for node.js 12.*, which also removes all warnings in earlier versions.
-- refactored in to wrapper functions for extracting values, so should new breaking changes come in later versions, it will be quicker to adjust.
-- major "package.json"-fuckups. Unless running build manually, the js-files where never packaged, nor built. Now whitelisted in package.json.
-- major fuckup 2: when they finally where packaged, they we're killed off when the C++ module was rebuilt on installment. So. Finally: js-files are now built to "dist", and the binary into "build". This way the TypeScript and LiveScript aren't required for end user
-
-### 2019-07-09/A: version 1.1.1
-- when replacing GNU Make, for some reason I used `yarn` in "package.json" — which may have failed builds for those not having it installed (and then not building "es-release"), and completely missing the point of getting rid of Make
-- updated README to reflect new build command (`npm run build`) (_should only ever be needed if you clone from git and contribute_)
-- added back the "main" entry in package.json. Hell of a blunder! Tests changed to import from root so they fail without it.
-- the never before tested example code here in the README, has been ran and corrected, thanks to @LiamKarlMitchell
-
-### 2019-03-08: version 1.1.0
-- rewrote the es part of the _lib_ code from LiveScript to TypeScript. The
-  prudent thing to do in a lib. The test remains in LS.
-- `offs_t` changed to `size_t` because of bitwidth goofyness. Thanks to @bmarkiv
-- removed dependency on GNU Make by adding build commands to "package.json".
-  Might help those on windows platform who didn't have it installed. However
-  they still rely on a horde of "common posix utils", so your setup might be
-  lacking anyway then.
-- _note that there are some compile warnings because of changes in C++ API's in
-  NAN/V8, ignored for now in contemplation whether to switch to node-addon-api
-  (napi for C++), since call overhead isn't an issue in this library, everything
-  considered.
-
-### 2018-01-16: version 1.0.0
-- bumped the version to 1.0.0 since, well, why not.
-- changed deprecated calls from `ForceSet` to `DefineOwnProperty`
-- general source noise cleanups
-- fixed compilation errors for newer nodejs. Thanks to @djulien
-- windows-specific problems (#5, #6), and more, fixed. Thanks to @bkmartinjr
-- updated README clarifying _Contribution Guidelines_
-
-### 2017-03-08: version 0.11.1
-- compilation fixes 10.8 OSX fix. Thanks to @arrayjam
-
-### 2016-07-21: version 0.10.1
-- `incore` fix for Mac OS. Thanks to @rustyconover
-
-### 2016-07-14: version 0.10.0
-- `incore` added. Thanks to @rustyconover
-
-### 2015-10-10: version 0.9.4
-- Compilation on Mac should work now. Thanks to @aeickhoff
-
-### 2015-10-01: version 0.9.3
-- Windows compatibility added. Thanks to @toxicwolf
-- Rewrote the bindings to Nan 2.0.9 API version (V8/io/Node hell...)
-    + Had to remove the error _codes_ to get it working in the time I had
-      available (or rather - didn't have..) —
-      error messages are still there — with code in message instead. Though,
-      usually nothing goes wrong, so only the test cares ;-)
-- Added some helpful targets in Makefile `human_errors`, `ls` only, `build`
-  only, etc. (useful if you wanna hack the module)
-- Since all _functionality_ that can possibly be is in place, I bumped all the
-  way to 0.8. Not battle tested enough to warrant higher.
-- Commented away experimental async read-ahead caching when readahead hint was on. It
-  hasn't broken, but it's an unnecessary risk. Plays safe. You can toy with it
-  yourself if you want to try to milk out some _ms_ performance.
-
-### 2015-03-04: version 0.1.3
-- This is the first public commit, and the code has one day of development put into it as of now. More tests are needed so don't count on it being production ready just yet (but soon).
-
 
 # Install
 Use npm or git.
