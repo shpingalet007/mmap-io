@@ -49,7 +49,7 @@ type MmapIo = {
         offset?: number,
         advise?: MapAdvise,
         name?: Buffer
-    ): Buffer
+    ): SharedArrayBuffer
 
     advise(
         buffer: Buffer,
