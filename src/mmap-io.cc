@@ -26,21 +26,9 @@ using namespace v8;
 // Just a bit more clear as to intent
 #define JS_FN(a) NAN_METHOD(a)
 
-// This lib is one of those pieces of code where clarity is better then puny micro opts (in
-// comparison to the massive blocking that will occur when the data is first read from disk)
-// Since casting `size` to `void*` feels a little "out there" considering that void* may be
-// 32b or 64b (or, I dunno, 47b on some quant particle system), we throw this struct in.
-struct MMap {
-    MMap(char* data, size_t size) : data(data), size(size) {}
-    char*   data = nullptr;
-    size_t  size = 0;
-};
 
-
-void do_mmap_cleanup(char* data, void* hint) {
-    auto map_info = static_cast<MMap*>(hint);
-    munmap(data, map_info->size);
-    delete map_info;
+void do_mmap_cleanup(void* data, size_t length, void* deleter_data) {
+    munmap(data, length);
 }
 
 inline int do_mmap_advice(char* addr, size_t length, int advise) {
@@ -163,11 +151,10 @@ JS_FN(mmap_map) {
 
         }
 
-        auto map_info = new MMap(data, size);
-        Nan::MaybeLocal<Object> buf = node::Buffer::New(
-            v8::Isolate::GetCurrent(), data, size, do_mmap_cleanup, static_cast<void*>(map_info));
+        std::shared_ptr<BackingStore> backingStore = v8::SharedArrayBuffer::NewBackingStore(data, size, do_mmap_cleanup, NULL);
+        Nan::MaybeLocal<Object> buf = v8::SharedArrayBuffer::New(v8::Isolate::GetCurrent(), backingStore);
         if (buf.IsEmpty()) {
-            return Nan::ThrowError(std::string("couldn't allocate Node Buffer()").c_str());
+            return Nan::ThrowError(std::string("couldn't allocate Node SharedArrayBuffer()").c_str());
         } else {
             info.GetReturnValue().Set(buf.ToLocalChecked());
         }
