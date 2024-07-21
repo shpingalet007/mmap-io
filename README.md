@@ -100,7 +100,7 @@ const core_stats = mmap.incore(buffer);
 
 ### Good to Know (TM)
 
-- Mappings over 1 GiB is not supported.
+- Mappings over 1 GiB are not supported.
 - The mappings are automatically unmapped when the buffer is garbage collected.
 - Write-mappings need the fd to be opened with "r+", or you'll get a permission error (13).
 - If you make a read-only mapping and then ignorantly set a value in the buffer, all hell previously unknown to a JS'er breaks loose (segmentation fault).
