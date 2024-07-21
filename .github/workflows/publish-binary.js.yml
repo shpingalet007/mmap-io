@@ -13,9 +13,7 @@ jobs:
       max-parallel: 2
       matrix:
         build-type: [
-          {os: "windows-latest", arch: "x64"},
           {os: "macos-latest", arch: "arm64"},
-          {os: "ubuntu-latest", arch: "x64"},
         ]
         node-version: [18.x, 19.x, 20.x, 21.x, 22.x]
 
@@ -40,7 +38,7 @@ jobs:
         run: npm run build-es
 
       - name: Build binary
-        run: npm run build-binary-${{ matrix.build-type.arch }}
+        run: npm run build
 
       - name: Push binaries
         env:

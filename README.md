@@ -1,5 +1,5 @@
 
-# mmap-io - Node.js addon for memory mapping files (mid-2024 version)
+# mmap-io - Node.js addon for memory mapping files (2024 version)
 
 ## Quick info
 
